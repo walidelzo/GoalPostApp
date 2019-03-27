@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  GoalVC.swift
 //  GoalPostApp
 //
 //  Created by Admin on 3/26/19.
@@ -8,11 +8,14 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class GoalVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        let goal = Goal()
+        
+        
+        
     }
 
 
