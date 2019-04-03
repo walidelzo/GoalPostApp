@@ -9,15 +9,23 @@
 import UIKit
 
 class GoalVC: UIViewController {
-
+    @IBOutlet weak var tableViewGoal: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let goal = Goal()
-        
-        
+        tableViewGoal.delegate = self
+        tableViewGoal.dataSource = self
+        tableViewGoal.isHidden = false
         
     }
 
-
+    @IBAction func AddBTNAction(_ sender: Any) {
+        guard let AddGoalVC = storyboard?.instantiateViewController(withIdentifier: "addGoalVC") else {return}
+        presentVeiwController(AddGoalVC)
+    }
+    
 }
+
+
+
 
