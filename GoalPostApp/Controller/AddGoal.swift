@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddGoal: UIViewController {
+class AddGoal: UIViewController ,UITextViewDelegate{
 
     @IBOutlet weak var goalTxt: UITextView!
     @IBOutlet weak var longTermBTN: UIButton!
@@ -25,6 +25,7 @@ class AddGoal: UIViewController {
         goalType = .shortTerm
         let tapGest = UITapGestureRecognizer(target: self, action: #selector(dismissKeyBoard))
         self.goalTextView.addGestureRecognizer(tapGest)
+        self.goalTextView.delegate = self
     }
 
     //tapGesturerecogonizer method
@@ -32,7 +33,9 @@ class AddGoal: UIViewController {
         self.goalTextView.endEditing(true)
     }
     
-
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        self.goalTextView.text = ""
+    }
     
     
     //MARK:-IBACtions
@@ -50,8 +53,14 @@ class AddGoal: UIViewController {
     }
     
     @IBAction func nextBTNAction(_ sender: Any) {
+        if goalTextView.text != "" {
+            guard let goalVC = storyboard?.instantiateViewController(withIdentifier: "FinishGoal") as? FinishGoal else {return}
+            self.presentVeiwController(goalVC)
+        }
     
     }
+    
+    
     
     @IBAction func backBTNActon(_ sender: Any)
     {

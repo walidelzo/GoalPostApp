@@ -12,7 +12,7 @@ extension UIViewController{
     
     func  presentVeiwController (_ uiViewController: UIViewController){
         let transtion = CATransition()
-        transtion.duration = 0.3
+        transtion.duration = 0.4
         transtion.type = .reveal
         transtion.subtype = .fromRight
         self.view.window?.layer.add(transtion, forKey: kCATransition)
@@ -21,8 +21,8 @@ extension UIViewController{
     
     func dismissViewController(_ uiViewController: UIViewController){
         let transtion = CATransition()
-        transtion.duration = 0.3
-        transtion.type = .fade
+        transtion.duration = 0.4
+        transtion.type = .reveal
         transtion.subtype = .fromLeft
         self.view.window?.layer.add(transtion, forKey: kCATransition)
         dismiss(animated: false, completion: nil)

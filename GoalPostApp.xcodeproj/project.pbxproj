@@ -11,6 +11,7 @@
 		840EDC992250AC40003B1597 /* Ext+UiviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840EDC982250AC40003B1597 /* Ext+UiviewController.swift */; };
 		840EDC9B2250D426003B1597 /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840EDC9A2250D426003B1597 /* UIViewExt.swift */; };
 		841314542254BB37009947A2 /* UIButtonExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841314532254BB37009947A2 /* UIButtonExt.swift */; };
+		841314562254DB1D009947A2 /* FinishGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841314552254DB1D009947A2 /* FinishGoal.swift */; };
 		84909B87224B436800B51C93 /* GoalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84909B86224B436800B51C93 /* GoalCell.swift */; };
 		84909B89224B59FB00B51C93 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84909B88224B59FB00B51C93 /* Enums.swift */; };
 		84909B8B224B5B8400B51C93 /* GoalVC+Ext+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84909B8A224B5B8400B51C93 /* GoalVC+Ext+TableView.swift */; };
@@ -28,6 +29,7 @@
 		840EDC982250AC40003B1597 /* Ext+UiviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+UiviewController.swift"; sourceTree = "<group>"; };
 		840EDC9A2250D426003B1597 /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
 		841314532254BB37009947A2 /* UIButtonExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExt.swift; sourceTree = "<group>"; };
+		841314552254DB1D009947A2 /* FinishGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishGoal.swift; sourceTree = "<group>"; };
 		84909B86224B436800B51C93 /* GoalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCell.swift; sourceTree = "<group>"; };
 		84909B88224B59FB00B51C93 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		84909B8A224B5B8400B51C93 /* GoalVC+Ext+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GoalVC+Ext+TableView.swift"; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 			children = (
 				84BB57C5224AC0EC00A479F1 /* GoalVC.swift */,
 				840EDC9622509C30003B1597 /* AddGoal.swift */,
+				841314552254DB1D009947A2 /* FinishGoal.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -202,6 +205,7 @@
 				84909B89224B59FB00B51C93 /* Enums.swift in Sources */,
 				84909B8B224B5B8400B51C93 /* GoalVC+Ext+TableView.swift in Sources */,
 				840EDC992250AC40003B1597 /* Ext+UiviewController.swift in Sources */,
+				841314562254DB1D009947A2 /* FinishGoal.swift in Sources */,
 				840EDC9722509C30003B1597 /* AddGoal.swift in Sources */,
 				84BB57C6224AC0EC00A479F1 /* GoalVC.swift in Sources */,
 				84909B8D224B715900B51C93 /* roundLabel.swift in Sources */,
