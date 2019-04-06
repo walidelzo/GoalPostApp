@@ -7,8 +7,10 @@
 //
 
 import UIKit
-
+import CoreData
 class GoalVC: UIViewController {
+    var goals:[Goal] = []
+    
     @IBOutlet weak var tableViewGoal: UITableView!
     
     override func viewDidLoad() {
@@ -18,11 +20,54 @@ class GoalVC: UIViewController {
         tableViewGoal.isHidden = false
         
     }
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.fetch { (success) in
+            if goals.count >= 1{
+                tableViewGoal.isHidden = false
+                tableViewGoal.reloadData()
+            }else{
+                tableViewGoal.isHidden = true
+            }
+        }
+        
+        
+        
+    }
+    
+    
     @IBAction func AddBTNAction(_ sender: Any) {
         guard let AddGoalVC = storyboard?.instantiateViewController(withIdentifier: "addGoalVC") else {return}
         presentVeiwController(AddGoalVC)
     }
+    
+}
+
+
+
+extension GoalVC {
+    
+    func fetch(completion:(_ complete:Bool)->())
+    {
+        guard let context = UIApplication.shared.delegate as? AppDelegate else {return}
+        let fetch = NSFetchRequest<Goal>(entityName: "Goal")
+        
+        do
+        {
+            try goals = context.persistentContainer.viewContext.fetch(fetch)
+            completion(true)
+            print("the count of  data \(goals.count)")
+        }
+        catch {
+            debugPrint("the error occured \(error.localizedDescription)")
+            completion(false)
+        }
+        
+        
+        
+    }
+    
     
 }
 

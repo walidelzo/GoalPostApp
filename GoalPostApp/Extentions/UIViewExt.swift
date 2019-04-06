@@ -7,28 +7,22 @@
 //
 
 import UIKit
-extension UIView{
-    
-    func bindKeyBoard(){
-        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardChanged(_:)), name:UIResponder.keyboardDidChangeFrameNotification, object:nil)
-        
+
+extension UIView {
+    func bindToKeyboard() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(_:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
     
-    @objc func keyBoardChanged(_ notifation :NSNotification){
+    @objc func keyboardWillChange(_ notification: NSNotification) {
+        let duration = notification.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
+        let curve = notification.userInfo![UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt
+        let startingFrame = (notification.userInfo![UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        let endingFrame = (notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let deltaY = endingFrame.origin.y - startingFrame.origin.y
         
-        let duration = notifation.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
-        let curve = (notifation.userInfo![UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt)!
-        let framBegin = (notifation.userInfo![UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue
-        let framEnd = (notifation.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
-        
-        let deltaY = CGFloat( (framEnd?.origin.y)!)  - CGFloat((framBegin?.origin.y)!)
-        
-        UIView.animate(withDuration: duration, delay: 0.0, options: UIView.AnimationOptions.init(rawValue: curve), animations: {
+        UIView.animateKeyframes(withDuration: duration, delay: 0.0, options: UIView.KeyframeAnimationOptions(rawValue: curve), animations: {
             self.frame.origin.y += deltaY
+            print(self.frame.origin.y)
         }, completion: nil)
-        
-        
     }
-    
-    
 }

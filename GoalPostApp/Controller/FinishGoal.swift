@@ -9,11 +9,11 @@
 import UIKit
 
 class FinishGoal: UIViewController,UITextFieldDelegate {
-
+    let appDelegate = UIApplication.shared.delegate as? AppDelegate
+    
     @IBOutlet weak var goalCompleteNumber: UITextField!
     @IBOutlet weak var createButton: UIButton!
-    
-    @IBOutlet weak var ViewBtn: UIView!
+   
     var goalDescription:String!
     var goalType:GoalType!
     
@@ -24,11 +24,18 @@ class FinishGoal: UIViewController,UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.createButton.bindKeyBoard()
+        self.createButton?.bindToKeyboard()
+        goalCompleteNumber.delegate = self
+       let tapGest = UITapGestureRecognizer(target: self, action: #selector(dismissme))
+       self.view.addGestureRecognizer(tapGest)
     }
-    func textFieldDidBeginEditing(_ textField: UITextField) {
+    
+    @objc func dismissme(){
+        self.view.endEditing(true)
+    }
+   func textFieldDidBeginEditing(_ textField: UITextField) {
         goalCompleteNumber.text = ""
-    }
+   }
     
     @IBAction func backBTNPressed(_ sender: Any) {
         dismissViewController(self)
@@ -36,5 +43,41 @@ class FinishGoal: UIViewController,UITextFieldDelegate {
     
     
     @IBAction func createAGoalPressed(_ sender: Any) {
+        if (self.goalCompleteNumber.text != ""){
+            self.save { (success) in
+                self.dismissViewController(self)
+            }
+        }else {
+            print(" empty field")
+        }
     }
+    
+    
+    
+    //MARK:this function to save Data to CoreData
+    func save(compeletion:(_ completion:Bool)->())
+    {
+        guard  let managedContext = appDelegate?.persistentContainer.viewContext else {return}
+        let goal = Goal(context: managedContext)
+        
+        goal.goalDescription = self.goalDescription
+        goal.goalCompletionValue = Int32(self.goalCompleteNumber.text!)!
+        goal.goalProgress = 0
+        goal.goalType = self.goalType.rawValue
+       
+        do {
+            try managedContext.save()
+            compeletion(true)
+            print("Success..")
+            let path = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true)
+            print(path)
+        }catch{
+            debugPrint("there are an Error\(error.localizedDescription)")
+            compeletion(false)
+        }
+        
+        
+    }
+    
+    
 }

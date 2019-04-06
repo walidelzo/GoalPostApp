@@ -10,7 +10,6 @@ import UIKit
 
 class AddGoal: UIViewController ,UITextViewDelegate{
 
-    @IBOutlet weak var goalTxt: UITextView!
     @IBOutlet weak var longTermBTN: UIButton!
     @IBOutlet weak var shortTermBTN: UIButton!
     @IBOutlet weak var goalTextView: UITextView!
@@ -19,13 +18,14 @@ class AddGoal: UIViewController ,UITextViewDelegate{
     var goalType: GoalType = .shortTerm
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.nextBtn.bindKeyBoard()
+       self.nextBtn?.bindToKeyboard()
         shortTermBTN.setSelect()
         longTermBTN.setDeselect()
         goalType = .shortTerm
         let tapGest = UITapGestureRecognizer(target: self, action: #selector(dismissKeyBoard))
         self.goalTextView.addGestureRecognizer(tapGest)
         self.goalTextView.delegate = self
+        //goalTextView.inputAccessoryView = nextBtn
     }
 
     //tapGesturerecogonizer method
@@ -35,6 +35,7 @@ class AddGoal: UIViewController ,UITextViewDelegate{
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         self.goalTextView.text = ""
+        self.goalTextView.textColor = UIColor.black
     }
     
     
@@ -54,8 +55,9 @@ class AddGoal: UIViewController ,UITextViewDelegate{
     
     @IBAction func nextBTNAction(_ sender: Any) {
         if goalTextView.text != "" {
-            guard let goalVC = storyboard?.instantiateViewController(withIdentifier: "FinishGoal") as? FinishGoal else {return}
-            self.presentVeiwController(goalVC)
+            guard let finishGoalVC = storyboard?.instantiateViewController(withIdentifier: "FinishGoal") as? FinishGoal else {return}
+            finishGoalVC.initMyVariables(description: self.goalTextView.text, goalTyp: self.goalType)
+            presentingViewController?.presentSecondView(finishGoalVC)
         }
     
     }

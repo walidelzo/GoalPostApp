@@ -15,12 +15,15 @@ extension GoalVC:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        print(goals.count)
+        return goals.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "goalCell", for: indexPath) as? GoalCell else {return UITableViewCell()}
-        cell.configureCell(goal: "read some Swift 5 Book.", Type: .shortTerm, progress: "14")
+        let goal = goals[indexPath.row]
+        
+        cell.configureCell(goal: goal)
         return cell
     }
     
