@@ -25,7 +25,6 @@ class AddGoal: UIViewController ,UITextViewDelegate{
         let tapGest = UITapGestureRecognizer(target: self, action: #selector(dismissKeyBoard))
         self.goalTextView.addGestureRecognizer(tapGest)
         self.goalTextView.delegate = self
-        //goalTextView.inputAccessoryView = nextBtn
     }
 
     //tapGesturerecogonizer method
@@ -54,7 +53,7 @@ class AddGoal: UIViewController ,UITextViewDelegate{
     }
     
     @IBAction func nextBTNAction(_ sender: Any) {
-        if goalTextView.text != "" {
+        if goalTextView.text != "" && goalTextView.text != "what is your Goal ?" {
             guard let finishGoalVC = storyboard?.instantiateViewController(withIdentifier: "FinishGoal") as? FinishGoal else {return}
             finishGoalVC.initMyVariables(description: self.goalTextView.text, goalTyp: self.goalType)
             presentingViewController?.presentSecondView(finishGoalVC)

@@ -87,6 +87,22 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="69.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KJH-Sx-FQd">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="69.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Complete Goal" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XYv-LB-RQN">
+                                                            <rect key="frame" x="68" y="18.5" width="184" height="33"/>
+                                                            <fontDescription key="fontDescription" name="AvenirNext-Heavy" family="Avenir Next" pointSize="24"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstItem="XYv-LB-RQN" firstAttribute="centerX" secondItem="KJH-Sx-FQd" secondAttribute="centerX" id="gy9-9y-Ff6"/>
+                                                        <constraint firstItem="XYv-LB-RQN" firstAttribute="centerY" secondItem="KJH-Sx-FQd" secondAttribute="centerY" id="tIi-vb-9m5"/>
+                                                    </constraints>
+                                                </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Goal :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KOS-dD-x7q">
                                                     <rect key="frame" x="5" y="5" width="60" height="27"/>
                                                     <constraints>
@@ -129,6 +145,7 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="KJH-Sx-FQd" secondAttribute="trailing" id="11d-Wi-NKP"/>
                                                 <constraint firstItem="vEw-GR-C12" firstAttribute="top" secondItem="ron-Y4-gbT" secondAttribute="top" id="4KZ-Di-qqn"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="vEw-GR-C12" secondAttribute="trailing" constant="20" symbolic="YES" id="51M-7r-CVW"/>
                                                 <constraint firstItem="ron-Y4-gbT" firstAttribute="leading" secondItem="a7M-ed-6lX" secondAttribute="leading" constant="5" id="5BI-9w-q1E"/>
@@ -137,15 +154,19 @@
                                                 <constraint firstItem="h3E-CK-dvj" firstAttribute="leading" secondItem="fFU-iY-dGj" secondAttribute="trailing" priority="750" constant="42" id="IT8-gN-Qm5"/>
                                                 <constraint firstItem="fFU-iY-dGj" firstAttribute="top" secondItem="KOS-dD-x7q" secondAttribute="top" id="Npg-dO-kje"/>
                                                 <constraint firstItem="fFU-iY-dGj" firstAttribute="leading" secondItem="KOS-dD-x7q" secondAttribute="trailing" constant="5" id="Nxu-Kr-jtz"/>
+                                                <constraint firstItem="KJH-Sx-FQd" firstAttribute="leading" secondItem="a7M-ed-6lX" secondAttribute="leading" id="RlV-3a-Aok"/>
                                                 <constraint firstItem="KOS-dD-x7q" firstAttribute="top" secondItem="a7M-ed-6lX" secondAttribute="top" constant="5" id="Tzp-WT-0kT"/>
                                                 <constraint firstItem="h3E-CK-dvj" firstAttribute="top" secondItem="a7M-ed-6lX" secondAttribute="top" constant="5" id="cls-5O-plD"/>
+                                                <constraint firstAttribute="bottom" secondItem="KJH-Sx-FQd" secondAttribute="bottom" id="hYH-Oi-coI"/>
                                                 <constraint firstAttribute="bottom" secondItem="ron-Y4-gbT" secondAttribute="bottom" constant="5" id="j2i-CK-yCU"/>
+                                                <constraint firstItem="KJH-Sx-FQd" firstAttribute="top" secondItem="a7M-ed-6lX" secondAttribute="top" id="jJz-PE-zn6"/>
                                                 <constraint firstItem="vEw-GR-C12" firstAttribute="top" secondItem="fFU-iY-dGj" secondAttribute="bottom" constant="12" id="tyJ-KS-E0z"/>
                                                 <constraint firstItem="KOS-dD-x7q" firstAttribute="leading" secondItem="a7M-ed-6lX" secondAttribute="leading" constant="5" id="vxe-qc-GVt"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="vEw-GR-C12" secondAttribute="bottom" constant="-4" id="zpU-e5-syg"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="completeView" destination="KJH-Sx-FQd" id="0Px-Wd-4Kc"/>
                                             <outlet property="goalLabel" destination="fFU-iY-dGj" id="k29-wl-1zY"/>
                                             <outlet property="goalType" destination="vEw-GR-C12" id="8tg-9x-0Am"/>
                                             <outlet property="progressLbl" destination="h3E-CK-dvj" id="IsL-aJ-0X3"/>
@@ -153,14 +174,46 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view alpha="0.84999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iiD-aj-leC">
+                                <rect key="frame" x="0.0" y="518" width="320" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b3i-dY-tAs">
+                                        <rect key="frame" x="265" y="10.5" width="45" height="29"/>
+                                        <fontDescription key="fontDescription" name="HoeflerText-Black" family="Hoefler Text" pointSize="17"/>
+                                        <state key="normal" title="Undo">
+                                            <color key="titleColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="UndoButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uHd-Oj-s9e"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="you can undo changes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ofF-MY-VCQ">
+                                        <rect key="frame" x="74" y="15" width="172.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.73106361040609136" green="0.11436501547830105" blue="0.11147758264061718" alpha="0.8555222602739726" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="CFQ-7n-80t"/>
+                                    <constraint firstItem="ofF-MY-VCQ" firstAttribute="centerX" secondItem="iiD-aj-leC" secondAttribute="centerX" id="GMl-ee-qve"/>
+                                    <constraint firstItem="ofF-MY-VCQ" firstAttribute="centerY" secondItem="iiD-aj-leC" secondAttribute="centerY" id="L02-N9-eJz"/>
+                                    <constraint firstItem="b3i-dY-tAs" firstAttribute="centerY" secondItem="iiD-aj-leC" secondAttribute="centerY" id="uIJ-mR-fZM"/>
+                                    <constraint firstAttribute="trailing" secondItem="b3i-dY-tAs" secondAttribute="trailing" constant="10" id="wpq-f9-ZWC"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="fd2-Ar-qCO" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="5I5-Lb-2dM"/>
                             <constraint firstItem="N7H-BG-9E4" firstAttribute="top" secondItem="fd2-Ar-qCO" secondAttribute="bottom" id="6Bq-Z7-TqG"/>
                             <constraint firstItem="fd2-Ar-qCO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="KGk-yb-E9V"/>
+                            <constraint firstAttribute="bottom" secondItem="iiD-aj-leC" secondAttribute="bottom" id="L8z-Tw-YPy"/>
                             <constraint firstItem="N7H-BG-9E4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="VSt-Yo-Pkc"/>
                             <constraint firstItem="Nij-NK-v6o" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="XI0-NQ-9FU"/>
+                            <constraint firstItem="iiD-aj-leC" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="bVr-9T-bGa"/>
+                            <constraint firstItem="iiD-aj-leC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="dGv-gA-2ky"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="N7H-BG-9E4" secondAttribute="bottom" id="f5E-eW-jpw"/>
                             <constraint firstItem="fd2-Ar-qCO" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="jeb-U7-Yq0"/>
                             <constraint firstItem="Nij-NK-v6o" firstAttribute="top" secondItem="fd2-Ar-qCO" secondAttribute="bottom" constant="110" id="z8o-ds-I70"/>
@@ -170,6 +223,7 @@
                     </view>
                     <connections>
                         <outlet property="tableViewGoal" destination="N7H-BG-9E4" id="Zg8-UX-idW"/>
+                        <outlet property="undoView" destination="iiD-aj-leC" id="9oO-TZ-6rn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

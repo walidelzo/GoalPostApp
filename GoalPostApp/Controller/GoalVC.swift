@@ -10,6 +10,10 @@ import UIKit
 import CoreData
 class GoalVC: UIViewController {
     var goals:[Goal] = []
+    var goalsUndo:[DeletedGoal] = []
+    let appDelegate = UIApplication.shared.delegate as? AppDelegate
+    
+    @IBOutlet weak var undoView: UIView!
     
     @IBOutlet weak var tableViewGoal: UITableView!
     
@@ -18,11 +22,16 @@ class GoalVC: UIViewController {
         tableViewGoal.delegate = self
         tableViewGoal.dataSource = self
         tableViewGoal.isHidden = false
+        undoView.isHidden = true
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        fetchFromCoreData()
+    }
+    
+    func fetchFromCoreData(){
         self.fetch { (success) in
             if goals.count >= 1{
                 tableViewGoal.isHidden = false
@@ -31,9 +40,6 @@ class GoalVC: UIViewController {
                 tableViewGoal.isHidden = true
             }
         }
-        
-        
-        
     }
     
     
@@ -42,11 +48,74 @@ class GoalVC: UIViewController {
         presentVeiwController(AddGoalVC)
     }
     
+    /////
+    @IBAction func UndoButton(_ sender: UIButton)
+    {
+       //goals.append(goalsUndo[0])
+        print(" the undo array count \(self.goalsUndo.count)")
+        print("the goals array count is \(self.goals.count)")
+        guard let contextManager = self.appDelegate?.persistentContainer.viewContext else {return}
+        let goal = Goal(context: contextManager)
+        
+        let thisDeletedGoal = self.goalsUndo[0]
+        
+        goal.goalDescription = thisDeletedGoal.goalDescription
+        goal.goalType = thisDeletedGoal.goalType.rawValue
+        goal.goalProgress = thisDeletedGoal.goalProgress
+        goal.goalCompletionValue = thisDeletedGoal.goalComplete
+        
+        do {
+            try contextManager.save()
+            print("the data was saved ..")
+        } catch{
+            debugPrint("the error occured \(error.localizedDescription)")
+        }
+        
+        self.fetchFromCoreData()
+        self.undoView.isHidden = true
+        
+        
+        
+    }
+    
 }
 
 
 
 extension GoalVC {
+    func setProgress(AtIndexPath:IndexPath)
+    {
+        guard let contextManager  = self.appDelegate?.persistentContainer.viewContext else {return}
+        let chosenGoal = goals[AtIndexPath.row]
+        if chosenGoal.goalProgress < chosenGoal.goalCompletionValue
+        {
+            chosenGoal.goalProgress += 1
+        }else{return}
+        
+        do {
+            try contextManager.save()
+        }
+        catch
+        {
+            debugPrint("An Error Occured \(error.localizedDescription)")
+        }
+        
+    }
+    
+    func DeleteData(AtIndexPath:IndexPath){
+        guard let contextManager = self.appDelegate?.persistentContainer.viewContext else {return}
+
+        contextManager.delete(goals[AtIndexPath.row])
+       
+        do {
+            try contextManager.save()
+            print("the data was saved ..")
+        } catch{
+            debugPrint("the error occured \(error.localizedDescription)")
+        }
+        
+        
+    }
     
     func fetch(completion:(_ complete:Bool)->())
     {

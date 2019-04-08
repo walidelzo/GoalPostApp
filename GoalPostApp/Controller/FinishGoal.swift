@@ -33,9 +33,23 @@ class FinishGoal: UIViewController,UITextFieldDelegate {
     @objc func dismissme(){
         self.view.endEditing(true)
     }
+    
    func textFieldDidBeginEditing(_ textField: UITextField) {
         goalCompleteNumber.text = ""
    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField.keyboardType == .numberPad && string != "" {
+            let numberStr: String = string
+            let formatter: NumberFormatter = NumberFormatter()
+            formatter.locale = Locale(identifier: "EN")
+            if let final = formatter.number(from: numberStr) {
+                textField.text =  "\(textField.text ?? "")\(final)"
+            }
+            return false
+        }
+        return true
+    }
     
     @IBAction func backBTNPressed(_ sender: Any) {
         dismissViewController(self)
@@ -69,8 +83,8 @@ class FinishGoal: UIViewController,UITextFieldDelegate {
             try managedContext.save()
             compeletion(true)
             print("Success..")
-            let path = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true)
-            print(path)
+            //let path = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true)
+          //  print(path)
         }catch{
             debugPrint("there are an Error\(error.localizedDescription)")
             compeletion(false)
