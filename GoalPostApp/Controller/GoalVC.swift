@@ -51,18 +51,26 @@ class GoalVC: UIViewController {
     /////
     @IBAction func UndoButton(_ sender: UIButton)
     {
-       //goals.append(goalsUndo[0])
+       undoDelteGoal()
+        
+    }
+    
+    
+    ///Undo function
+    
+    func undoDelteGoal(){
+        //goals.append(goalsUndo[0])
         print(" the undo array count \(self.goalsUndo.count)")
         print("the goals array count is \(self.goals.count)")
         guard let contextManager = self.appDelegate?.persistentContainer.viewContext else {return}
         let goal = Goal(context: contextManager)
         
-        let thisDeletedGoal = self.goalsUndo[0]
+        let thisDeletedGoal = self.goalsUndo.last
         
-        goal.goalDescription = thisDeletedGoal.goalDescription
-        goal.goalType = thisDeletedGoal.goalType.rawValue
-        goal.goalProgress = thisDeletedGoal.goalProgress
-        goal.goalCompletionValue = thisDeletedGoal.goalComplete
+        goal.goalDescription = thisDeletedGoal?.goalDescription
+        goal.goalType = thisDeletedGoal?.goalType.rawValue
+        goal.goalProgress = thisDeletedGoal!.goalProgress
+        goal.goalCompletionValue = thisDeletedGoal!.goalComplete
         
         do {
             try contextManager.save()
@@ -73,7 +81,6 @@ class GoalVC: UIViewController {
         
         self.fetchFromCoreData()
         self.undoView.isHidden = true
-        
         
         
     }

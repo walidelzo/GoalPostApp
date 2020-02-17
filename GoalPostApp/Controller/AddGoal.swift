@@ -15,15 +15,17 @@ class AddGoal: UIViewController ,UITextViewDelegate{
     @IBOutlet weak var goalTextView: UITextView!
     
     @IBOutlet weak var nextBtn: UIButton!
+    @IBOutlet weak var NextBTNStack: UIStackView!
     var goalType: GoalType = .shortTerm
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-       self.nextBtn?.bindToKeyboard()
+       // self.nextBtn?.bindToKeyboard()
         shortTermBTN.setSelect()
         longTermBTN.setDeselect()
         goalType = .shortTerm
         let tapGest = UITapGestureRecognizer(target: self, action: #selector(dismissKeyBoard))
-        self.goalTextView.addGestureRecognizer(tapGest)
+        self.view.addGestureRecognizer(tapGest)
         self.goalTextView.delegate = self
     }
 
@@ -32,10 +34,10 @@ class AddGoal: UIViewController ,UITextViewDelegate{
         self.goalTextView.endEditing(true)
     }
     
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        self.goalTextView.text = ""
-        self.goalTextView.textColor = UIColor.black
-    }
+ func textViewDidBeginEditing(_ textView: UITextView) {
+      self.goalTextView.text = ""
+      self.goalTextView.textColor = UIColor.black
+  }
     
     
     //MARK:-IBACtions

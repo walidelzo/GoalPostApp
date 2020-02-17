@@ -17,6 +17,7 @@ class GoalCell: UITableViewCell {
     @IBOutlet weak var progressLbl: UILabel!
     
     @IBOutlet weak var completeView: UIView!
+    
     func configureCell(goal:Goal){
         goalLabel.text = goal.goalDescription
         goalType.text = goal.goalType
